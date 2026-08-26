@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&amp;display=swap');
+      .vela-text {
+        font-family: 'Playfair Display', 'Georgia', serif;
+        font-size: 72px;
+        font-weight: 500;
+        fill: #55796D;
+        letter-spacing: -0.5px;
+      }
+      .vela-dot {
+        fill: #E28970;
+      }
+    </style>
+  </defs>
+  <!-- Coral / Peach Dot over the V -->
+  <circle cx="37" cy="27" r="6.5" class="vela-dot" />
+  
+  <!-- Velapp Wordmark -->
+  <text x="14" y="92" class="vela-text">Velapp</text>
+</svg>

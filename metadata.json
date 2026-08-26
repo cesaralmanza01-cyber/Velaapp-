@@ -1,0 +1,6 @@
+{
+  "name": "Diagnóstico Metabólico",
+  "description": "Diagnóstico corporal interactivo y plan de alimentación personalizado - Vela por la Dra. Lorena Castro",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
