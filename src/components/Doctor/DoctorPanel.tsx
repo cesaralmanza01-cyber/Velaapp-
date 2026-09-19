@@ -3,6 +3,7 @@ import { UserProfile } from '../../types';
 import { ActiveAlertsView } from './ActiveAlertsView';
 import { AuditTableView } from './AuditTableView';
 import { PatientDetailModal } from './PatientDetailModal';
+import { QuickPatientEntryModal } from './QuickPatientEntryModal';
 import { calculatePatientAlerts } from '../../utils/clinicalAlerts';
 import {
   ShieldAlert,
@@ -10,6 +11,7 @@ import {
   RefreshCw,
   LogOut,
   ArrowLeft,
+  UserPlus,
 } from 'lucide-react';
 
 interface DoctorPanelProps {
@@ -27,6 +29,7 @@ export const DoctorPanel: React.FC<DoctorPanelProps> = ({
   const [patients, setPatients] = useState<UserProfile[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedPatient, setSelectedPatient] = useState<UserProfile | null>(null);
+  const [showQuickEntry, setShowQuickEntry] = useState<boolean>(false);
 
   // Fetch patients list
   const fetchPatients = async () => {
@@ -63,6 +66,10 @@ export const DoctorPanel: React.FC<DoctorPanelProps> = ({
     }
   };
 
+  const handlePatientCreated = (created: UserProfile) => {
+    setPatients((prev) => [created, ...prev]);
+  };
+
   return (
     <div className="min-h-screen bg-[#FAF6F0] text-[#2E3A36] font-sans flex flex-col selection:bg-[#6E9E93] selection:text-white">
       {/* Header Médico Profesional */}
@@ -85,6 +92,16 @@ export const DoctorPanel: React.FC<DoctorPanelProps> = ({
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => setShowQuickEntry(true)}
+              className="px-3.5 py-1.5 bg-[#6E9E93] hover:bg-[#5f8a80] text-white rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Crear paciente desde consulta 1:1, sin cuestionario largo"
+            >
+              <UserPlus className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Nueva paciente (consulta 1:1)</span>
+              <span className="sm:hidden">Nueva</span>
+            </button>
+
             <button
               onClick={fetchPatients}
               disabled={loading}
@@ -175,6 +192,14 @@ export const DoctorPanel: React.FC<DoctorPanelProps> = ({
           patient={selectedPatient}
           onClose={() => setSelectedPatient(null)}
           onUpdatePatient={handleUpdatePatient}
+        />
+      )}
+
+      {/* Modal Nueva Paciente - Consulta 1:1 */}
+      {showQuickEntry && (
+        <QuickPatientEntryModal
+          onClose={() => setShowQuickEntry(false)}
+          onCreated={handlePatientCreated}
         />
       )}
     </div>
